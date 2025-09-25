@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './components/ui/card';
+import { Button } from './components/ui/button';
+import { Input } from './components/ui/input';
+import { Label } from './components/ui/label';
 import { BusinessAssumptionsModal } from './components/BusinessAssumptionsModal';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './components/ui/tooltip';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
-import { InfoIcon } from 'lucide-react';
+import { InfoIcon, HelpCircle, TrendingUp, Users, DollarSign } from 'lucide-react';
 
 const PartnerModelDashboard = () => {
   const [variables, setVariables] = useState({
@@ -185,10 +188,20 @@ const PartnerModelDashboard = () => {
 
   return (
     <TooltipProvider>
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">Partner Model Dashboard</h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-2">
+              Partner Model Dashboard
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <InfoIcon className="w-6 h-6 ml-2 text-blue-500 hover:text-blue-700 cursor-help inline" />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>✅ shadcn/ui tooltip is working! Hover over info icons to see detailed explanations.</p>
+                </TooltipContent>
+              </Tooltip>
+            </h1>
             <p className="text-lg text-gray-600">Compare compensation models and analyze revenue impact</p>
           </div>
       
@@ -197,66 +210,70 @@ const PartnerModelDashboard = () => {
         <CardHeader>
           <CardTitle className="flex items-center justify-between">
             <span>Business Assumptions</span>
-            <button
+            <Button
               onClick={() => setIsModalOpen(true)}
-              className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 hover:text-blue-700 transition-all duration-200 border border-blue-200 hover:border-blue-300"
-              title="Learn more about these calculations"
+              variant="outline"
+              size="sm"
+              className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white border-0 shadow-md hover:shadow-lg transition-all duration-200"
             >
-              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+              <HelpCircle className="w-4 h-4 mr-2" />
               How do these work?
-            </button>
+            </Button>
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-              <label className="text-sm text-gray-600 block mb-1">Annual Management Fee (%)</label>
-              <input
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="space-y-2">
+              <Label className="text-sm font-medium text-gray-700 flex items-center gap-2">
+                <DollarSign className="w-4 h-4 text-green-600" />
+                Annual Management Fee (%)
+              </Label>
+              <Input
                 type="number"
                 step="0.1"
                 value={variables.managementFeePercentage}
                 onChange={(e) => updateVariable('managementFeePercentage', e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+                className="text-center font-semibold"
               />
             </div>
-            <div>
-              <label className="text-sm text-gray-600 block mb-1 flex items-center">
+            <div className="space-y-2">
+              <Label className="text-sm font-medium text-gray-700 flex items-center gap-2">
+                <TrendingUp className="w-4 h-4 text-blue-600" />
                 Attributable Growth (%)
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <InfoIcon className="w-4 h-4 ml-1 text-gray-400 hover:text-gray-600 cursor-help" />
+                    <InfoIcon className="w-4 h-4 text-gray-400 hover:text-blue-600 cursor-help transition-colors" />
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>% of AUM growth credited to partner's efforts</p>
                   </TooltipContent>
                 </Tooltip>
-              </label>
-              <input
+              </Label>
+              <Input
                 type="number"
                 value={variables.attributableGrowthPercentage}
                 onChange={(e) => updateVariable('attributableGrowthPercentage', e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+                className="text-center font-semibold"
               />
             </div>
-            <div>
-              <label className="text-sm text-gray-600 block mb-1 flex items-center">
+            <div className="space-y-2">
+              <Label className="text-sm font-medium text-gray-700 flex items-center gap-2">
+                <Users className="w-4 h-4 text-purple-600" />
                 Appointments per $50M AUM
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <InfoIcon className="w-4 h-4 ml-1 text-gray-400 hover:text-gray-600 cursor-help" />
+                    <InfoIcon className="w-4 h-4 text-gray-400 hover:text-purple-600 cursor-help transition-colors" />
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>Client meetings generated per $50M of attributable AUM</p>
                   </TooltipContent>
                 </Tooltip>
-              </label>
-              <input
+              </Label>
+              <Input
                 type="number"
                 value={variables.appointmentsPer50M}
                 onChange={(e) => updateVariable('appointmentsPer50M', e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+                className="text-center font-semibold"
               />
             </div>
           </div>
@@ -276,7 +293,7 @@ const PartnerModelDashboard = () => {
           <CardContent className="space-y-3">
             <div>
               <label className="text-sm text-gray-600 block mb-1">Setup Fee</label>
-              <input
+              <Input
                 type="number"
                 value={variables.model1SetupFee}
                 onChange={(e) => updateVariable('model1SetupFee', e.target.value)}
@@ -285,7 +302,7 @@ const PartnerModelDashboard = () => {
             </div>
             <div>
               <label className="text-sm text-gray-600 block mb-1">Monthly Retainer</label>
-              <input
+              <Input
                 type="number"
                 value={variables.model1MonthlyRetainer}
                 onChange={(e) => updateVariable('model1MonthlyRetainer', e.target.value)}
@@ -297,7 +314,7 @@ const PartnerModelDashboard = () => {
               <div className="space-y-2">
                 <div>
                   <label className="text-xs text-gray-600 block">$100M AUM Bonus</label>
-                  <input
+                  <Input
                     type="number"
                     value={variables.model1Bonus100M}
                     onChange={(e) => updateVariable('model1Bonus100M', e.target.value)}
@@ -306,7 +323,7 @@ const PartnerModelDashboard = () => {
                 </div>
                 <div>
                   <label className="text-xs text-gray-600 block">$250M AUM Bonus</label>
-                  <input
+                  <Input
                     type="number"
                     value={variables.model1Bonus250M}
                     onChange={(e) => updateVariable('model1Bonus250M', e.target.value)}
@@ -315,7 +332,7 @@ const PartnerModelDashboard = () => {
                 </div>
                 <div>
                   <label className="text-xs text-gray-600 block">$500M AUM Bonus</label>
-                  <input
+                  <Input
                     type="number"
                     value={variables.model1Bonus500M}
                     onChange={(e) => updateVariable('model1Bonus500M', e.target.value)}
@@ -338,7 +355,7 @@ const PartnerModelDashboard = () => {
           <CardContent className="space-y-3">
             <div>
               <label className="text-sm text-gray-600 block mb-1">Setup Fee</label>
-              <input
+              <Input
                 type="number"
                 value={variables.model2SetupFee}
                 onChange={(e) => updateVariable('model2SetupFee', e.target.value)}
@@ -347,7 +364,7 @@ const PartnerModelDashboard = () => {
             </div>
             <div>
               <label className="text-sm text-gray-600 block mb-1">Monthly Retainer</label>
-              <input
+              <Input
                 type="number"
                 value={variables.model2MonthlyRetainer}
                 onChange={(e) => updateVariable('model2MonthlyRetainer', e.target.value)}
@@ -359,7 +376,7 @@ const PartnerModelDashboard = () => {
               <div className="space-y-2">
                 <div>
                   <label className="text-xs text-gray-600 block">Initial Grant</label>
-                  <input
+                  <Input
                     type="number"
                     step="0.1"
                     value={variables.model2InitialEquity}
@@ -369,7 +386,7 @@ const PartnerModelDashboard = () => {
                 </div>
                 <div>
                   <label className="text-xs text-gray-600 block">$100M AUM Unlock</label>
-                  <input
+                  <Input
                     type="number"
                     step="0.1"
                     value={variables.model2EquityUnlock100M}
@@ -379,7 +396,7 @@ const PartnerModelDashboard = () => {
                 </div>
                 <div>
                   <label className="text-xs text-gray-600 block">$250M AUM Unlock</label>
-                  <input
+                  <Input
                     type="number"
                     step="0.1"
                     value={variables.model2EquityUnlock250M}
@@ -389,7 +406,7 @@ const PartnerModelDashboard = () => {
                 </div>
                 <div>
                   <label className="text-xs text-gray-600 block">$500M AUM Unlock</label>
-                  <input
+                  <Input
                     type="number"
                     step="0.1"
                     value={variables.model2EquityUnlock500M}
@@ -413,7 +430,7 @@ const PartnerModelDashboard = () => {
           <CardContent className="space-y-3">
             <div>
               <label className="text-sm text-gray-600 block mb-1">Setup Fee</label>
-              <input
+              <Input
                 type="number"
                 value={variables.model3SetupFee}
                 onChange={(e) => updateVariable('model3SetupFee', e.target.value)}
@@ -422,7 +439,7 @@ const PartnerModelDashboard = () => {
             </div>
             <div>
               <label className="text-sm text-gray-600 block mb-1">Monthly Retainer</label>
-              <input
+              <Input
                 type="number"
                 value={variables.model3MonthlyRetainer}
                 onChange={(e) => updateVariable('model3MonthlyRetainer', e.target.value)}
@@ -434,7 +451,7 @@ const PartnerModelDashboard = () => {
               <div className="space-y-2">
                 <div>
                   <label className="text-xs text-gray-600 block">Per Appointment</label>
-                  <input
+                  <Input
                     type="number"
                     value={variables.model3CommissionPerAppointment}
                     onChange={(e) => updateVariable('model3CommissionPerAppointment', e.target.value)}
@@ -443,7 +460,7 @@ const PartnerModelDashboard = () => {
                 </div>
                 <div>
                   <label className="text-xs text-gray-600 block">AUM Commission (%)</label>
-                  <input
+                  <Input
                     type="number"
                     step="0.01"
                     value={variables.model3CommissionAUMPercentage}
@@ -453,7 +470,7 @@ const PartnerModelDashboard = () => {
                 </div>
                 <div>
                   <label className="text-xs text-gray-600 block">Equity Grant (%)</label>
-                  <input
+                  <Input
                     type="number"
                     step="0.1"
                     value={variables.model3EquityGrant}
@@ -588,13 +605,13 @@ const PartnerModelDashboard = () => {
         </Card>
       </div>
 
-        {/* Business Assumptions Modal */}
-        <BusinessAssumptionsModal 
-          isOpen={isModalOpen} 
-          onClose={() => setIsModalOpen(false)} 
-        />
-        </div>
+      {/* Business Assumptions Modal */}
+      <BusinessAssumptionsModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
       </div>
+    </div>
     </TooltipProvider>
   );
 };
