@@ -285,9 +285,12 @@ const PartnerModelDashboard = () => {
         {/* Model 1 Inputs */}
         <Card className="border-blue-200 bg-gradient-to-br from-blue-50 to-white">
           <CardHeader className="bg-gradient-to-r from-blue-100 to-blue-50 rounded-t-xl">
-            <CardTitle className="text-blue-900 flex items-center gap-2">
-              <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
-              Model 1: Fee Based Partner
+            <CardTitle className="text-blue-900 flex items-start gap-3">
+              <div className="w-3 h-3 bg-blue-600 rounded-full mt-1"></div>
+              <div>
+                <div className="font-bold text-lg">Model 1:</div>
+                <div className="font-normal text-base text-blue-700">Fee Based Partner</div>
+              </div>
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -347,9 +350,12 @@ const PartnerModelDashboard = () => {
         {/* Model 2 Inputs */}
         <Card className="border-green-200 bg-gradient-to-br from-green-50 to-white">
           <CardHeader className="bg-gradient-to-r from-green-100 to-green-50 rounded-t-xl">
-            <CardTitle className="text-green-900 flex items-center gap-2">
-              <div className="w-3 h-3 bg-green-600 rounded-full"></div>
-              Model 2: Equity Based Partner
+            <CardTitle className="text-green-900 flex items-start gap-3">
+              <div className="w-3 h-3 bg-green-600 rounded-full mt-1"></div>
+              <div>
+                <div className="font-bold text-lg">Model 2:</div>
+                <div className="font-normal text-base text-green-700">Equity Based Partner</div>
+              </div>
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -422,9 +428,12 @@ const PartnerModelDashboard = () => {
         {/* Model 3 Inputs */}
         <Card className="border-purple-200 bg-gradient-to-br from-purple-50 to-white">
           <CardHeader className="bg-gradient-to-r from-purple-100 to-purple-50 rounded-t-xl">
-            <CardTitle className="text-purple-900 flex items-center gap-2">
-              <div className="w-3 h-3 bg-purple-600 rounded-full"></div>
-              Model 3: Hybrid Fee/Equity Partner
+            <CardTitle className="text-purple-900 flex items-start gap-3">
+              <div className="w-3 h-3 bg-purple-600 rounded-full mt-1"></div>
+              <div>
+                <div className="font-bold text-lg">Model 3:</div>
+                <div className="font-normal text-base text-purple-700">Hybrid Fee/Equity Partner</div>
+              </div>
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
