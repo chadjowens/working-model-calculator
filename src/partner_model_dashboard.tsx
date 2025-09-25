@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './components/ui/card';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
 
 const PartnerModelDashboard = () => {
   const [variables, setVariables] = useState({
@@ -32,23 +32,23 @@ const PartnerModelDashboard = () => {
     model3EquityGrant: 0.25
   });
 
-  const [selectedAUMLevels, setSelectedAUMLevels] = useState([50, 100, 250, 500, 750]);
-  const [comparisonData, setComparisonData] = useState([]);
-  const [chartData, setChartData] = useState([]);
+  const [selectedAUMLevels] = useState([50, 100, 250, 500, 750]);
+  const [comparisonData, setComparisonData] = useState<any[]>([]);
+  const [chartData, setChartData] = useState<any[]>([]);
 
   // Calculate annual revenue from AUM
-  const calculateAnnualRevenue = (aumLevel) => {
+  const calculateAnnualRevenue = (aumLevel: number) => {
     return aumLevel * 1000000 * (variables.managementFeePercentage / 100);
   };
 
   // Calculate compensation as percentage of revenue
-  const calculateRevenuePercentage = (compensation, aumLevel) => {
+  const calculateRevenuePercentage = (compensation: number, aumLevel: number) => {
     const revenue = calculateAnnualRevenue(aumLevel);
     return (compensation / revenue) * 100;
   };
 
   // Calculate Model 1: The Secure Partner
-  const calculateModel1 = (aumLevel, includeSetup = false) => {
+  const calculateModel1 = (aumLevel: number, includeSetup = false) => {
     const setupFee = includeSetup ? variables.model1SetupFee : 0;
     const annualRetainer = variables.model1MonthlyRetainer * 12;
     
@@ -71,7 +71,7 @@ const PartnerModelDashboard = () => {
   };
 
   // Calculate Model 2: The Growth Investor
-  const calculateModel2 = (aumLevel, includeSetup = false) => {
+  const calculateModel2 = (aumLevel: number, includeSetup = false) => {
     const setupFee = includeSetup ? variables.model2SetupFee : 0;
     const annualRetainer = variables.model2MonthlyRetainer * 12;
     
@@ -94,7 +94,7 @@ const PartnerModelDashboard = () => {
   };
 
   // Calculate Model 3: The Hybrid Achiever
-  const calculateModel3 = (aumLevel, includeSetup = false) => {
+  const calculateModel3 = (aumLevel: number, includeSetup = false) => {
     const setupFee = includeSetup ? variables.model3SetupFee : 0;
     const annualRetainer = variables.model3MonthlyRetainer * 12;
     
@@ -158,14 +158,14 @@ const PartnerModelDashboard = () => {
     setChartData(newComparisonData);
   }, [variables, selectedAUMLevels]);
 
-  const updateVariable = (key, value) => {
+  const updateVariable = (key: string, value: string) => {
     setVariables(prev => ({
       ...prev,
       [key]: parseFloat(value) || 0
     }));
   };
 
-  const formatCurrency = (amount) => {
+  const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -174,11 +174,10 @@ const PartnerModelDashboard = () => {
     }).format(amount);
   };
 
-  const formatPercentage = (amount, decimals = 1) => {
+  const formatPercentage = (amount: number, decimals = 1) => {
     return `${amount.toFixed(decimals)}%`;
   };
 
-  const COLORS = ['#3B82F6', '#10B981', '#8B5CF6'];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8">
@@ -516,8 +515,8 @@ const PartnerModelDashboard = () => {
                 <XAxis dataKey="aum" tickFormatter={(value) => `$${value}M`} />
                 <YAxis tickFormatter={(value) => `$${value/1000}K`} />
                 <Tooltip 
-                  formatter={(value, name) => [formatCurrency(value), name]}
-                  labelFormatter={(label) => `$${label}M AUM`}
+                  formatter={(value: any, name: any) => [formatCurrency(Number(value)), name]}
+                  labelFormatter={(label: any) => `$${label}M AUM`}
                 />
                 <Legend />
                 <Bar dataKey="model1Ongoing" fill="#3B82F6" name="Model 1: Secure" />
@@ -539,8 +538,8 @@ const PartnerModelDashboard = () => {
                 <XAxis dataKey="aum" tickFormatter={(value) => `$${value}M`} />
                 <YAxis tickFormatter={(value) => `${value}%`} />
                 <Tooltip 
-                  formatter={(value, name) => [`${value.toFixed(2)}%`, name]}
-                  labelFormatter={(label) => `$${label}M AUM`}
+                  formatter={(value: any, name: any) => [`${Number(value).toFixed(2)}%`, name]}
+                  labelFormatter={(label: any) => `$${label}M AUM`}
                 />
                 <Legend />
                 <Line type="monotone" dataKey="model1RevenuePercent" stroke="#3B82F6" strokeWidth={2} name="Model 1 %" />
