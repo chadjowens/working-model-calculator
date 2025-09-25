@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './components/ui/card';
+import { BusinessAssumptionsModal } from './components/BusinessAssumptionsModal';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
 
 const PartnerModelDashboard = () => {
@@ -35,6 +36,7 @@ const PartnerModelDashboard = () => {
   const [selectedAUMLevels] = useState([50, 100, 250, 500, 750]);
   const [comparisonData, setComparisonData] = useState<any[]>([]);
   const [chartData, setChartData] = useState<any[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Calculate annual revenue from AUM
   const calculateAnnualRevenue = (aumLevel: number) => {
@@ -190,7 +192,19 @@ const PartnerModelDashboard = () => {
       {/* Business Assumptions */}
       <Card>
         <CardHeader>
-          <CardTitle>Business Assumptions</CardTitle>
+          <CardTitle className="flex items-center justify-between">
+            <span>Business Assumptions</span>
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 hover:text-blue-700 transition-all duration-200 border border-blue-200 hover:border-blue-300"
+              title="Learn more about these calculations"
+            >
+              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              How do these work?
+            </button>
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -205,7 +219,13 @@ const PartnerModelDashboard = () => {
               />
             </div>
             <div>
-              <label className="text-sm text-gray-600 block mb-1">Attributable Growth (%)</label>
+              <label className="text-sm text-gray-600 block mb-1 flex items-center">
+                Attributable Growth (%)
+                <svg className="w-4 h-4 ml-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <title>% of AUM growth credited to partner's efforts</title>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </label>
               <input
                 type="number"
                 value={variables.attributableGrowthPercentage}
@@ -214,7 +234,13 @@ const PartnerModelDashboard = () => {
               />
             </div>
             <div>
-              <label className="text-sm text-gray-600 block mb-1">Appointments per $50M AUM</label>
+              <label className="text-sm text-gray-600 block mb-1 flex items-center">
+                Appointments per $50M AUM
+                <svg className="w-4 h-4 ml-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <title>Client meetings generated per $50M of attributable AUM</title>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </label>
               <input
                 type="number"
                 value={variables.appointmentsPer50M}
@@ -550,6 +576,12 @@ const PartnerModelDashboard = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Business Assumptions Modal */}
+      <BusinessAssumptionsModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
       </div>
     </div>
   );
