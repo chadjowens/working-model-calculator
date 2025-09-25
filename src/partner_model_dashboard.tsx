@@ -259,7 +259,7 @@ const PartnerModelDashboard = () => {
           <CardHeader className="bg-gradient-to-r from-blue-100 to-blue-50 rounded-t-xl">
             <CardTitle className="text-blue-900 flex items-center gap-2">
               <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
-              Model 1: The Secure Partner
+              Model 1: Fee Based Partner
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -321,7 +321,7 @@ const PartnerModelDashboard = () => {
           <CardHeader className="bg-gradient-to-r from-green-100 to-green-50 rounded-t-xl">
             <CardTitle className="text-green-900 flex items-center gap-2">
               <div className="w-3 h-3 bg-green-600 rounded-full"></div>
-              Model 2: The Growth Investor
+              Model 2: Equity Based Partner
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -396,7 +396,7 @@ const PartnerModelDashboard = () => {
           <CardHeader className="bg-gradient-to-r from-purple-100 to-purple-50 rounded-t-xl">
             <CardTitle className="text-purple-900 flex items-center gap-2">
               <div className="w-3 h-3 bg-purple-600 rounded-full"></div>
-              Model 3: The Hybrid Achiever
+              Model 3: Hybrid Fee/Equity Partner
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -468,9 +468,9 @@ const PartnerModelDashboard = () => {
                 <tr className="bg-gradient-to-r from-gray-100 to-gray-50 border-b border-gray-200">
                   <th className="text-left p-4 font-semibold text-gray-800">AUM Level</th>
                   <th className="text-left p-4 font-semibold text-gray-800">Annual Revenue</th>
-                  <th className="text-center p-4 font-semibold text-blue-800">Model 1: Secure Partner</th>
-                  <th className="text-center p-4 font-semibold text-green-800">Model 2: Growth Investor</th>
-                  <th className="text-center p-4 font-semibold text-purple-800">Model 3: Hybrid Achiever</th>
+                  <th className="text-center p-4 font-semibold text-blue-800">Model 1: Fee Based Partner</th>
+                  <th className="text-center p-4 font-semibold text-green-800">Model 2: Equity Based Partner</th>
+                  <th className="text-center p-4 font-semibold text-purple-800">Model 3: Hybrid Fee/Equity Partner</th>
                 </tr>
               </thead>
               <tbody>
@@ -545,8 +545,8 @@ const PartnerModelDashboard = () => {
                   labelFormatter={(label: any) => `$${label}M AUM`}
                 />
                 <Legend />
-                <Bar dataKey="model1Ongoing" fill="#3B82F6" name="Model 1: Secure" />
-                <Bar dataKey="model2Ongoing" fill="#10B981" name="Model 2: Growth" />
+                <Bar dataKey="model1Ongoing" fill="#3B82F6" name="Model 1: Fee Based" />
+                <Bar dataKey="model2Ongoing" fill="#10B981" name="Model 2: Equity Based" />
                 <Bar dataKey="model3Ongoing" fill="#8B5CF6" name="Model 3: Hybrid" />
               </BarChart>
             </ResponsiveContainer>
