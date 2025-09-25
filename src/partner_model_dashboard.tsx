@@ -289,7 +289,7 @@ const PartnerModelDashboard = () => {
               <div className="w-3 h-3 bg-blue-600 rounded-full mt-1"></div>
               <div>
                 <div className="font-bold text-lg">Model 1:</div>
-                <div className="font-normal text-base text-blue-700">Fee Based Partner</div>
+                <div className="font-normal text-base text-blue-700">Fee-based Partnership</div>
               </div>
             </CardTitle>
           </CardHeader>
@@ -354,7 +354,7 @@ const PartnerModelDashboard = () => {
               <div className="w-3 h-3 bg-green-600 rounded-full mt-1"></div>
               <div>
                 <div className="font-bold text-lg">Model 2:</div>
-                <div className="font-normal text-base text-green-700">Equity Based Partner</div>
+                <div className="font-normal text-base text-green-700">Equity-based Partnership</div>
               </div>
             </CardTitle>
           </CardHeader>
@@ -432,7 +432,7 @@ const PartnerModelDashboard = () => {
               <div className="w-3 h-3 bg-purple-600 rounded-full mt-1"></div>
               <div>
                 <div className="font-bold text-lg">Model 3:</div>
-                <div className="font-normal text-base text-purple-700">Hybrid Fee/Equity Partner</div>
+                <div className="font-normal text-base text-purple-700">Hybrid Fee/Equity-based Partnership</div>
               </div>
             </CardTitle>
           </CardHeader>
