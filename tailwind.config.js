@@ -17,9 +17,27 @@ export default {
         primary: {
           DEFAULT: "hsl(222.2 47.4% 11.2%)",
           foreground: "hsl(210 40% 98%)"
+        },
+        popover: {
+          DEFAULT: "hsl(0 0% 100%)",
+          foreground: "hsl(222.2 84% 4.9%)"
         }
-      }
+      },
+      keyframes: {
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        "fade-out": {
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0" },
+        },
+      },
+      animation: {
+        "fade-in": "fade-in 0.2s ease-out",
+        "fade-out": "fade-out 0.2s ease-out",
+      },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 }

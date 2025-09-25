@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './components/ui/card';
 import { BusinessAssumptionsModal } from './components/BusinessAssumptionsModal';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './components/ui/tooltip';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { InfoIcon } from 'lucide-react';
 
 const PartnerModelDashboard = () => {
   const [variables, setVariables] = useState({
@@ -182,12 +184,13 @@ const PartnerModelDashboard = () => {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Partner Model Dashboard</h1>
-          <p className="text-lg text-gray-600">Compare compensation models and analyze revenue impact</p>
-        </div>
+    <TooltipProvider>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold text-gray-900 mb-2">Partner Model Dashboard</h1>
+            <p className="text-lg text-gray-600">Compare compensation models and analyze revenue impact</p>
+          </div>
       
       {/* Business Assumptions */}
       <Card>
@@ -221,10 +224,14 @@ const PartnerModelDashboard = () => {
             <div>
               <label className="text-sm text-gray-600 block mb-1 flex items-center">
                 Attributable Growth (%)
-                <svg className="w-4 h-4 ml-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <title>% of AUM growth credited to partner's efforts</title>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <InfoIcon className="w-4 h-4 ml-1 text-gray-400 hover:text-gray-600 cursor-help" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>% of AUM growth credited to partner's efforts</p>
+                  </TooltipContent>
+                </Tooltip>
               </label>
               <input
                 type="number"
@@ -236,10 +243,14 @@ const PartnerModelDashboard = () => {
             <div>
               <label className="text-sm text-gray-600 block mb-1 flex items-center">
                 Appointments per $50M AUM
-                <svg className="w-4 h-4 ml-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <title>Client meetings generated per $50M of attributable AUM</title>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <InfoIcon className="w-4 h-4 ml-1 text-gray-400 hover:text-gray-600 cursor-help" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Client meetings generated per $50M of attributable AUM</p>
+                  </TooltipContent>
+                </Tooltip>
               </label>
               <input
                 type="number"
@@ -540,7 +551,7 @@ const PartnerModelDashboard = () => {
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="aum" tickFormatter={(value) => `$${value}M`} />
                 <YAxis tickFormatter={(value) => `$${value/1000}K`} />
-                <Tooltip 
+                <RechartsTooltip 
                   formatter={(value: any, name: any) => [formatCurrency(Number(value)), name]}
                   labelFormatter={(label: any) => `$${label}M AUM`}
                 />
@@ -563,7 +574,7 @@ const PartnerModelDashboard = () => {
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="aum" tickFormatter={(value) => `$${value}M`} />
                 <YAxis tickFormatter={(value) => `${value}%`} />
-                <Tooltip 
+                <RechartsTooltip 
                   formatter={(value: any, name: any) => [`${Number(value).toFixed(2)}%`, name]}
                   labelFormatter={(label: any) => `$${label}M AUM`}
                 />
@@ -577,13 +588,14 @@ const PartnerModelDashboard = () => {
         </Card>
       </div>
 
-      {/* Business Assumptions Modal */}
-      <BusinessAssumptionsModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-      />
+        {/* Business Assumptions Modal */}
+        <BusinessAssumptionsModal 
+          isOpen={isModalOpen} 
+          onClose={() => setIsModalOpen(false)} 
+        />
+        </div>
       </div>
-    </div>
+    </TooltipProvider>
   );
 };
 
